@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { BookComponent } from './BookComponent'
+import React, { Component } from "react";
+import { BookComponent } from "./BookComponent";
 
 /* 
   TODO: 
@@ -12,17 +12,17 @@ export class BookShelfComponent extends Component {
         <h2 className="bookshelf-title">{this.props.title}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-          {/* DATA: book-title, book-author, book-cover, CATEGORY */}
-            <BookComponent 
-              book-title={null} 
-              book-author={null} 
+            {/* DATA: book-title, book-author, book-cover, CATEGORY */}
+            <BookComponent
+              book-title={null}
+              book-author={null}
               book-cover={null}
             />
           </ol>
         </div>
-      </div> 
-    )
+      </div>
+    );
   }
 }
 
-export default BookShelfComponent
+export default BookShelfComponent;
