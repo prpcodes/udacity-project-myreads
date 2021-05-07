@@ -14,12 +14,16 @@ export class BookComponent extends Component {
           <div className="book-top">
             <div
               className="book-cover"
-              style={{ width: 128, height: 192, backgroundImage: 'url("")' }}
+              style={{
+                width: 128,
+                height: 192,
+                backgroundImage: `url(${this.props.bookCover})`,
+              }}
             ></div>
             <BookShelfChangerComponent />
           </div>
-          <div className="book-title">The Hobbit</div>
-          <div className="book-authors">J.R.R. Tolkien</div>
+          <div className="book-title">{this.props.bookTitle}</div>
+          <div className="book-authors">{this.props.bookAuthors}</div>
         </div>
       </li>
     );
