@@ -3,7 +3,7 @@ import { BookComponent } from "./BookComponent";
 
 /* 
   TODO: 
-  1. Passing down props for the title
+  - [ ] passing down props into the <BookComponent /> 
 */
 export class BookShelfComponent extends Component {
   render() {
@@ -14,9 +14,11 @@ export class BookShelfComponent extends Component {
           <ol className="books-grid">
             {/* DATA: book-title, book-author, book-cover, CATEGORY */}
             <BookComponent
-              book-title={null}
-              book-author={null}
-              book-cover={null}
+              bookTitle={"Ender's Game"}
+              bookAuthors={"Orson Scott Card"}
+              bookCover={
+                "http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api"
+              }
             />
           </ol>
         </div>
