@@ -1,12 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./App.css";
 
+//API
 import * as BooksAPI from "./BooksAPI";
 //Components
-import { SearchComponent } from "./components/SearchComponent";
 import { BookShelfComponent } from "./components/BookShelfComponent";
 
-console.log(BooksAPI.getAll());
+console.log(BooksAPI.getAll([1]));
+
 class BooksApp extends React.Component {
   state = {
     /**
@@ -16,36 +18,26 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
+    books: BooksAPI.getAll(),
   };
-
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchComponent />
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <BookShelfComponent
-                  books={[null]}
-                  title={"Currently Reading"}
-                />
-                <BookShelfComponent books={[null]} title={"Want to Read"} />
-                <BookShelfComponent books={[null]} title={"Read"} />
-                <BookShelfComponent books={[null]} title={"Uncategorized"} />
-              </div>
-            </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>
-                Add a book
-              </button>
+        <div className="list-books">
+          <div className="list-books-title">
+            <h1>MyReads</h1>
+          </div>
+          <div className="list-books-content">
+            <div>
+              <BookShelfComponent books={[null]} title={"Currently Reading"} />
+              <BookShelfComponent books={[null]} title={"Want to Read"} />
+              <BookShelfComponent books={[null]} title={"Read"} />
             </div>
           </div>
-        )}
+          <div className="open-search">
+            <Link className="button" to="/search">Add a book</Link>
+          </div>
+        </div>
       </div>
     );
   }

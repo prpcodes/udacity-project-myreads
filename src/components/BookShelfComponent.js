@@ -3,7 +3,8 @@ import { BookComponent } from "./BookComponent";
 
 /* 
   TODO: 
-  - [ ] passing down props into the <BookComponent /> 
+  - [ ] getting data 
+  - [ ] passing down data into the <BookComponent /> 
 */
 export class BookShelfComponent extends Component {
   render() {
@@ -12,7 +13,6 @@ export class BookShelfComponent extends Component {
         <h2 className="bookshelf-title">{this.props.title}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {/* DATA: book-title, book-author, book-cover, CATEGORY */}
             <BookComponent
               bookTitle={"Ender's Game"}
               bookAuthors={"Orson Scott Card"}
