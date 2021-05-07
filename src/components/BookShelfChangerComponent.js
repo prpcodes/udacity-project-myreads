@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-
+/* 
+  TODO: 
+  1. create moveTo(currentlyReading/wantToRead/read/none) function
+*/
 export class BookShelfChangerComponent extends Component {
     render() {
         return (
