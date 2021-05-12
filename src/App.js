@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 
@@ -7,16 +7,28 @@ import * as BooksAPI from "./BooksAPI";
 //Components
 import { BookShelfComponent } from "./components/BookShelfComponent";
 
-console.log(BooksAPI.getAll());
+console.log();
 
 class BooksApp extends React.Component {
-  state = {
-    books: BooksAPI.getAll(),
-    currentlyReading: null,
-    wantedToRead: null,
-    read: null,
-    none: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+      currentBooks: [],
+      wantBooks: [],
+      readBooks: [],
+    };
+  }
+
+  componentDidMount() {
+    Promise.resolve(BooksAPI.getAll()).then((books) => {
+      this.setState({
+        books,
+      });
+      console.log(this.state.books);
+    });
+  }
+
   render() {
     return (
       <div className="app">
@@ -26,13 +38,21 @@ class BooksApp extends React.Component {
           </div>
           <div className="list-books-content">
             <div>
-              <BookShelfComponent books={[null]} title={"Currently Reading"} />
-              <BookShelfComponent books={[null]} title={"Want to Read"} />
-              <BookShelfComponent books={[null]} title={"Read"} />
+              <BookShelfComponent
+                books={this.state.books}
+                title={"Currently Reading"}
+              />
+              <BookShelfComponent
+                books={this.state.books}
+                title={"Want to Read"}
+              />
+              <BookShelfComponent books={this.state.books} title={"Read"} />
             </div>
           </div>
           <div className="open-search">
-            <Link className="button" to="/search">Add a book</Link>
+            <Link className="button" to="/search">
+              Add a book
+            </Link>
           </div>
         </div>
       </div>
