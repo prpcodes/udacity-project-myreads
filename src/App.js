@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 
@@ -6,8 +6,6 @@ import "./App.css";
 import * as BooksAPI from "./BooksAPI";
 //Components
 import { BookShelfComponent } from "./components/BookShelfComponent";
-
-console.log();
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -17,6 +15,7 @@ class BooksApp extends React.Component {
       currentBooks: [],
       wantBooks: [],
       readBooks: [],
+      //shelf: "",
     };
   }
 
