@@ -1,7 +1,7 @@
 import React from "react";
 import { BookShelfChangerComponent } from "./BookShelfChangerComponent";
 
-export const BookComponent = ({ title, authors, thumbnail, infoLink }) => {
+export const BookComponent = ({ title, authors, imageLinks, infoLink }) => {
   return (
     <li>
       <div className="book">
@@ -11,7 +11,7 @@ export const BookComponent = ({ title, authors, thumbnail, infoLink }) => {
             style={{
               width: 128,
               height: 192,
-              backgroundImage: `url(${thumbnail})`,
+              backgroundImage: `url(${imageLinks.thumbnail})`,
             }}
           ></div>
           <BookShelfChangerComponent />
