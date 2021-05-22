@@ -4,6 +4,7 @@ import "./App.css";
 
 //API
 import * as BooksAPI from "./BooksAPI";
+
 //Components
 import { BookShelfComponent } from "./components/BookShelfComponent";
 
@@ -11,20 +12,51 @@ class BooksApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: [],
-      currentBooks: [],
-      wantBooks: [],
-      readBooks: [],
-      //shelf: "",
+      currentlyReading: [],
+      wantToRead: [],
+      read: [],
     };
   }
 
   componentDidMount() {
-    Promise.resolve(BooksAPI.getAll()).then((books) => {
-      this.setState({
-        books,
+    this.getBooks();
+  }
+
+  getBooks() {
+    BooksAPI.getAll().then((returnedBooks) => {
+      let currentlyReading = [];
+      let wantToRead = [];
+      let read = [];
+      returnedBooks.forEach((book) => {
+        if (book.shelf === "currentlyReading") {
+          currentlyReading.push({
+            id: book.id,
+            title: book.title,
+            authors: book.authors || [],
+            image: book.imageLinks.thumbnail,
+            shelf: book.shelf,
+          });
+        }
+        if (book.shelf === "wantToRead") {
+          wantToRead.push({
+            id: book.id,
+            title: book.title,
+            authors: book.authors || [],
+            image: book.imageLinks.thumbnail,
+            shelf: book.shelf,
+          });
+        }
+        if (book.shelf === "read") {
+          read.push({
+            id: book.id,
+            title: book.title,
+            authors: book.authors || [],
+            image: book.imageLinks.thumbnail,
+            shelf: book.shelf,
+          });
+        }
       });
-      console.log(this.state.books);
+      this.setState({ currentlyReading, wantToRead, read });
     });
   }
 
@@ -36,23 +68,18 @@ class BooksApp extends React.Component {
             <h1>MyReads</h1>
           </div>
           <div className="list-books-content">
-            <div>
-              <BookShelfComponent
-                books={this.state.books}
-                title={"Currently Reading"}
-                shelf={"currentlyReading"}
-              />
-              <BookShelfComponent
-                books={this.state.books}
-                title={"Want to Read"}
-                shelf={"wantToRead"}
-              />
-              <BookShelfComponent
-                books={this.state.books}
-                title={"Read"}
-                shelf={"read"}
-              />
-            </div>
+            <BookShelfComponent
+              title={"Currently Reading"}
+              books={this.state.currentlyReading}
+            />
+            <BookShelfComponent
+              title={"Want To Read"}
+              books={this.state.wantToRead}
+            />
+            <BookShelfComponent
+              title={"Done Reading"}
+              books={this.state.read}
+            />
           </div>
           <div className="open-search">
             <Link className="button" to="/search">
