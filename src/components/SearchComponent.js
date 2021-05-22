@@ -50,7 +50,7 @@ class SearchComponent extends React.Component {
             <input
               type="text"
               placeholder="Search by title or author"
-              value={this.state.value}
+              value={this.state.value || ""}
               onChange={this.handleChange.bind(this)}
             />
           </div>
