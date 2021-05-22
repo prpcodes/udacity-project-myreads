@@ -22,6 +22,12 @@ class SearchComponent extends React.Component {
     };
   }
 
+  componentDidMount() {
+    console.warn(
+      "NOTE: The search from BooksAPI is limited to a particular set of search terms. You can find these search terms here: https://raw.githubusercontent.com/prpwien/udacity-project-myreads/main/SEARCH_TERMS.md So, don't worry if you don't find a specific author or title. Every search is limited by search terms.",
+    );
+  }
+
   handleChange(e) {
     this.setState({ value: e.target.value });
     BooksAPI.search(e.target.value).then((e) => {
@@ -39,6 +45,7 @@ class SearchComponent extends React.Component {
       }
     });
   }
+
   render() {
     return (
       <div className="search-books">
