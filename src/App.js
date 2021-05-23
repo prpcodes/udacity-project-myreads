@@ -33,7 +33,7 @@ class BooksApp extends React.Component {
             id: book.id,
             title: book.title,
             authors: book.authors || [],
-            image: book.imageLinks.thumbnail,
+            image: book.imageLinks && book.imageLinks.thumbnail,
             shelf: book.shelf,
           });
         }
@@ -42,7 +42,7 @@ class BooksApp extends React.Component {
             id: book.id,
             title: book.title,
             authors: book.authors || [],
-            image: book.imageLinks.thumbnail,
+            image: book.imageLinks && book.imageLinks.thumbnail,
             shelf: book.shelf,
           });
         }
@@ -51,7 +51,7 @@ class BooksApp extends React.Component {
             id: book.id,
             title: book.title,
             authors: book.authors || [],
-            image: book.imageLinks.thumbnail,
+            image: book.imageLinks && book.imageLinks.thumbnail,
             shelf: book.shelf,
           });
         }
