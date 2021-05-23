@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 //API
 import * as BooksAPI from "../BooksAPI";
 
-export const BookShelfChangerComponent = ({ value = "none", id }) => {
+export const BookShelfChangerComponent = ({ value, id }) => {
   function handleChange(e) {
     BooksAPI.update({ id: id }, e.target.value).then(() =>
       window.location.reload(),
@@ -13,7 +13,7 @@ export const BookShelfChangerComponent = ({ value = "none", id }) => {
 
   return (
     <div className="book-shelf-changer">
-      <select value={value} onChange={handleChange}>
+      <select value={(value = value || "none")} onChange={handleChange}>
         <option value="move" disabled>
           Move to...
         </option>
@@ -27,6 +27,7 @@ export const BookShelfChangerComponent = ({ value = "none", id }) => {
 };
 BookShelfChangerComponent.propTypes = {
   value: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default BookShelfChangerComponent;
