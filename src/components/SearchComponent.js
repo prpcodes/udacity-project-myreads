@@ -19,6 +19,7 @@ class SearchComponent extends React.Component {
     super(props);
     this.state = {
       books: [],
+      value: "",
     };
   }
 
@@ -37,11 +38,13 @@ class SearchComponent extends React.Component {
             id: book.id,
             title: book.title,
             authors: book.authors || [],
-            image: book.imageLinks.thumbnail,
+            image: book.imageLinks && book.imageLinks.thumbnail,
             shelf: book.shelf,
           };
         });
         this.setState({ books: books });
+      } else {
+        this.setState({ books: [] });
       }
     });
   }
