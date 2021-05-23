@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { BookComponent } from "./BookComponent";
 
 export const BookShelfComponent = ({ title, books }) => {
@@ -14,4 +15,9 @@ export const BookShelfComponent = ({ title, books }) => {
       </div>
     </div>
   );
+};
+
+BookShelfComponent.propTypes = {
+  title: PropTypes.string,
+  books: PropTypes.array,
 };
