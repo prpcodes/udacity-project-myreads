@@ -19,30 +19,58 @@ class SearchComponent extends React.Component {
     super(props);
     this.state = {
       books: [],
+      getBooks: [],
       value: "",
     };
   }
 
   componentDidMount() {
+    this.getBooks();
     console.warn(
       "NOTE: The search from BooksAPI is limited to a particular set of search terms. You can find these search terms here: https://raw.githubusercontent.com/prpwien/udacity-project-myreads/main/SEARCH_TERMS.md So, don't worry if you don't find a specific author or title. Every search is limited by search terms.",
     );
   }
 
+  getBooks() {
+    BooksAPI.getAll().then((res) => {
+      let getBooks = [];
+      res.forEach((book) => {
+        getBooks.push({
+          id: book.id,
+          title: book.title,
+          authors: book.authors || [],
+          image: book.imageLinks && book.imageLinks.thumbnail,
+          shelf: book.shelf,
+        });
+      });
+      this.setState({ getBooks });
+    });
+  }
+
   handleChange(e) {
     this.setState({ value: e.target.value });
-    BooksAPI.search(e.target.value).then((e) => {
-      if (Array.isArray(e)) {
-        const books = e.map((book) => {
-          return {
-            id: book.id,
-            title: book.title,
-            authors: book.authors || [],
-            image: book.imageLinks && book.imageLinks.thumbnail,
-            shelf: book.shelf,
-          };
-        });
-        this.setState({ books: books });
+    let getBooks = this.state.getBooks;
+    BooksAPI.search(e.target.value).then((res) => {
+      if (Array.isArray(res)) {
+        if (res && res.length > 0) {
+          const matchingBooks = res.map(function (book) {
+            let shelvedBooks = getBooks.find((b) => book.id === b.id);
+            book.shelf = shelvedBooks ? shelvedBooks.shelf : "none";
+            return {
+              id: book.id,
+              title: book.title,
+              authors: book.authors || [],
+              imageLinks:
+                book.imageLinks &&
+                book.imageLinks.thumbnail &&
+                book.imageLinks.smallThumbnail,
+              shelf: book.shelf,
+            };
+          });
+          this.setState({ books: matchingBooks });
+        } else {
+          this.setState({ books: [] });
+        }
       } else {
         this.setState({ books: [] });
       }
