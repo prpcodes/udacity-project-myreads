@@ -1,12 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
+import { BookShelfComponent } from "./components/BookShelfComponent";
 import "./App.css";
 
 //API
 import * as BooksAPI from "./BooksAPI";
-
-//Components
-import { BookShelfComponent } from "./components/BookShelfComponent";
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -33,7 +33,10 @@ class BooksApp extends React.Component {
             id: book.id,
             title: book.title,
             authors: book.authors || [],
-            image: book.imageLinks && book.imageLinks.thumbnail,
+            imageLinks:
+              book.imageLinks &&
+              book.imageLinks.thumbnail &&
+              book.imageLinks.smallThumbnail,
             shelf: book.shelf,
           });
         }
@@ -42,7 +45,10 @@ class BooksApp extends React.Component {
             id: book.id,
             title: book.title,
             authors: book.authors || [],
-            image: book.imageLinks && book.imageLinks.thumbnail,
+            imageLinks:
+              book.imageLinks &&
+              book.imageLinks.thumbnail &&
+              book.imageLinks.smallThumbnail,
             shelf: book.shelf,
           });
         }
@@ -51,7 +57,10 @@ class BooksApp extends React.Component {
             id: book.id,
             title: book.title,
             authors: book.authors || [],
-            image: book.imageLinks && book.imageLinks.thumbnail,
+            imageLinks:
+              book.imageLinks &&
+              book.imageLinks.thumbnail &&
+              book.imageLinks.smallThumbnail,
             shelf: book.shelf,
           });
         }
@@ -91,5 +100,11 @@ class BooksApp extends React.Component {
     );
   }
 }
+
+BooksApp.propTypes = {
+  currentlyReading: PropTypes.array,
+  wantToRead: PropTypes.array,
+  read: PropTypes.array,
+};
 
 export default BooksApp;
